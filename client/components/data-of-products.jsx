@@ -57,55 +57,55 @@ const DataOfProducts = [
     price: 6,
     description: 'integrate next-generation platforms'
   },
-  // {
-  //   id: '25a76df8-366f-4b6d-b87e-bba5d93a3bdc',
-  //   title: 'Coriander - Seed',
-  //   image: 'http://dummyimage.com/106x159.jpg/dddddd/000000',
-  //   price: 15,
-  //   description: 'enable extensible channels'
-  // },
-  // {
-  //   id: '513eefaa-503d-433a-8523-ae1100cc8ce3',
-  //   title: 'Poppy Seed',
-  //   image: 'http://dummyimage.com/250x146.jpg/dddddd/000000',
-  //   price: 9,
-  //   description: 'transform 24/7 applications'
-  // },
-  // {
-  //   id: '28d551be-8e12-4309-85b2-5340a4a221d4',
-  //   title: 'Juice - Orangina',
-  //   image: 'http://dummyimage.com/202x102.jpg/ff4444/ffffff',
-  //   price: 12,
-  //   description: 'deliver magnetic ROI'
-  // },
-  // {
-  //   id: '061373d2-e3a7-414e-8eb2-0d17a3abde20',
-  //   title: 'Flour - All Purpose',
-  //   image: 'http://dummyimage.com/229x216.jpg/5fa2dd/ffffff',
-  //   price: 13,
-  //   description: 'productize interactive infomediaries'
-  // },
-  // {
-  //   id: 'ce06f71b-b554-42f6-ae92-a0e614c53d28',
-  //   title: 'Extract - Raspberry',
-  //   image: 'http://dummyimage.com/215x232.jpg/cc0000/ffffff',
-  //   price: 15,
-  //   description: 'unleash one-to-one e-tailers'
-  // },
-  // {
-  //   id: '94b8cdc5-c8bc-45fe-89da-c85472cce89f',
-  //   title: 'Muffin - Carrot Individual Wrap',
-  //   image: 'http://dummyimage.com/205x183.jpg/5fa2dd/ffffff',
-  //   price: 11,
-  //   description: 'maximize frictionless experiences'
-  // },
-  // {
-  //   id: 'b34e7f67-7e1b-4be5-b868-d64e3b839a44',
-  //   title: 'Chutney Sauce',
-  //   image: 'http://dummyimage.com/192x150.jpg/ff4444/ffffff',
-  //   price: 6,
-  //   description: 'disintermediate out-of-the-box paradigms'
-  // },
+  {
+    id: '25a76df8-366f-4b6d-b87e-bba5d93a3bdc',
+    title: 'Coriander - Seed',
+    image: 'http://dummyimage.com/106x159.jpg/dddddd/000000',
+    price: 15,
+    description: 'enable extensible channels'
+  },
+  {
+    id: '513eefaa-503d-433a-8523-ae1100cc8ce3',
+    title: 'Poppy Seed',
+    image: 'http://dummyimage.com/250x146.jpg/dddddd/000000',
+    price: 9,
+    description: 'transform 24/7 applications'
+  },
+  {
+    id: '28d551be-8e12-4309-85b2-5340a4a221d4',
+    title: 'Juice - Orangina',
+    image: 'http://dummyimage.com/202x102.jpg/ff4444/ffffff',
+    price: 12,
+    description: 'deliver magnetic ROI'
+  },
+  {
+    id: '061373d2-e3a7-414e-8eb2-0d17a3abde20',
+    title: 'Flour - All Purpose',
+    image: 'http://dummyimage.com/229x216.jpg/5fa2dd/ffffff',
+    price: 13,
+    description: 'productize interactive infomediaries'
+  },
+  {
+    id: 'ce06f71b-b554-42f6-ae92-a0e614c53d28',
+    title: 'Extract - Raspberry',
+    image: 'http://dummyimage.com/215x232.jpg/cc0000/ffffff',
+    price: 15,
+    description: 'unleash one-to-one e-tailers'
+  },
+  {
+    id: '94b8cdc5-c8bc-45fe-89da-c85472cce89f',
+    title: 'Muffin - Carrot Individual Wrap',
+    image: 'http://dummyimage.com/205x183.jpg/5fa2dd/ffffff',
+    price: 11,
+    description: 'maximize frictionless experiences'
+  },
+  {
+    id: 'b34e7f67-7e1b-4be5-b868-d64e3b839a44',
+    title: 'Chutney Sauce',
+    image: 'http://dummyimage.com/192x150.jpg/ff4444/ffffff',
+    price: 6,
+    description: 'disintermediate out-of-the-box paradigms'
+  },
   // {
   //   id: 'acfdc4ae-49dc-41ac-a9a3-80a44a464e41',
   //   title: 'Wine - Red, Wolf Blass, Yellow',

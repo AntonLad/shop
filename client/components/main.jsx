@@ -1,17 +1,20 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import DataOfProducts from './data-of-products'
 import Header from './header'
+import { allProducts } from '../redux/reducers/products'
 
 const Cards = () => {
   const dispatch = useDispatch()
+  dispatch(allProducts(DataOfProducts))
+  const listOfProducts = useSelector((store) => store.products.productList)
   return (
     <div>
       <Header />
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap -mx-4 pt-40 pb-5">
-          {DataOfProducts.map((it) => {
+          {listOfProducts.map((it) => {
             return (
               <div key={it.id} className="card w-full sm:w-1/2 md:w-1/3 xl:w-1/4 p-4">
                 <div className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
