@@ -2,12 +2,19 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
+import { sortProductsByName, sortProductsByPrice } from '../redux/reducers/products'
+
+
 // import DataOfProducts from './data-of-products'
 
 const Header = () => {
   const dispatch = useDispatch()
   const productsBasket = useSelector((store) => store.basket.productInBasket)
   const [isRevers, setIsRevers] = useState(true)
+  const [isReversPrice, setIsReversPrise] = useState(true)
+  const sumPrice = productsBasket.reduce((acc, rec) => {
+    return acc + rec.price
+  }, 0)
   return (
     <div className="flex flex-col items-center justify-center bg-indigo-100 text-black font-bold border shadow-lg p-2 w-screen">
       <div className="flex justify-between w-full items-center z-50 justify-items-stretch">
@@ -24,14 +31,22 @@ const Header = () => {
           <Link to="/basket">Basket, {productsBasket.length}</Link>
         </div>
         <div id="order-count" className="order-count border rounded py-1 px-2">
-          <Link to="/basket">Summury of products, XX usd</Link>
+          <Link to="/basket">Summury of products: {sumPrice} usd</Link>
         </div>
         <div id="order-count" className="order-count border rounded py-1 px-2">
           <button type="button" className="bg-indigo-400 rounded-md mr-2 p-1">
             USD
           </button>
-          <button type="button" className="bg-indigo-400 rounded-md mr-2 p-1">
-            EUR
+          <button 
+            type="button" 
+            className="bg-indigo-400 rounded-md mr-2 p-1"
+            onClick={()=> {
+              productsBasket.map((it) => {
+                return it.price * 2
+              })
+            }}
+            >
+              EUR
           </button>
           <button type="button" className="bg-indigo-400 rounded-md mr-2 p-1">
             CAD
@@ -42,9 +57,8 @@ const Header = () => {
             type="button"
             className="sort-price bg-yellow-300 rounded-md mr-2 p-1"
             onClick={() => {
-              dispatch({
-                type: 'SORT_PRODUCTS_BY_PRICE'
-              })
+              setIsReversPrise(!isReversPrice)
+              dispatch(sortProductsByPrice(isReversPrice))
             }}
             >
             Sort by price
@@ -54,10 +68,7 @@ const Header = () => {
             className="sort-name bg-yellow-300 rounded-md mr-2 p-1"
             onClick={() => {
               setIsRevers(!isRevers)
-              dispatch({
-                type: 'SORT_PRODUCTS',
-                payload: isRevers
-              })
+              dispatch(sortProductsByName(isRevers))
             }}
           >
             Sort by name

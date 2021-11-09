@@ -18,38 +18,13 @@ export default (state = initialState, action) => {
       }
     }
     case SORT_PRODUCTS: {
-      if (action.payload) {
-        const prodSort = DataOfProducts.sort((a, b) => {
-          const nameA = a.title.toLowerCase()
-          const nameB = b.title.toLowerCase()
-          if (nameA < nameB) return -1
-          if (nameA > nameB) return 1
-          return 0
-        })
-        return {
-          productList: [...prodSort]
-        }
-      }
-      {
-        const prodSort = DataOfProducts.sort((a, b) => {
-          const nameA = a.title.toLowerCase()
-          const nameB = b.title.toLowerCase()
-          if (nameA < nameB) return 1
-          if (nameA > nameB) return -1
-          return 0
-        })
-        return {
-          productList: [...prodSort]
-        }
+      return {
+        productList: [...action.payload]
       }
     }
-    /* falls through */
     case SORT_PRODUCTS_BY_PRICE: {
-      const prodSortByPrice = DataOfProducts.sort((a, b) => {
-        return a.price - b.price
-      })
       return {
-        productList: [...prodSortByPrice]
+        productList: [...action.payload]
       }
     }
     default:
@@ -59,7 +34,57 @@ export default (state = initialState, action) => {
 
 export function allProducts(value) {
   return {
-    type: 'PRODUCT_LIST',
+    type: PRODUCT_LIST,
     payload: value
+  }
+}
+
+export function sortProductsByName(value) {
+  if (value) {
+    const prodSort = DataOfProducts.sort((a, b) => {
+      const nameA = a.title.toLowerCase()
+      const nameB = b.title.toLowerCase()
+      if (nameA < nameB) return -1
+      if (nameA > nameB) return 1
+      return 0
+    })
+    return {
+      type: SORT_PRODUCTS,
+      payload: prodSort
+    }
+  }
+  {
+    const prodSort = DataOfProducts.sort((a, b) => {
+      const nameA = a.title.toLowerCase()
+      const nameB = b.title.toLowerCase()
+      if (nameA < nameB) return 1
+      if (nameA > nameB) return -1
+      return 0
+    })
+    return {
+      type: SORT_PRODUCTS,
+      payload: prodSort
+    }
+  }
+}
+
+export function sortProductsByPrice(value) {
+  if (value) {
+    const prodSortByPrice = DataOfProducts.sort((a, b) => {
+      return a.price - b.price
+    })
+    return {
+      type: SORT_PRODUCTS_BY_PRICE,
+      payload: prodSortByPrice
+    }
+  }
+  {
+    const prodSortByPrice = DataOfProducts.sort((a, b) => {
+      return b.price - a.price
+    })
+    return {
+      type: SORT_PRODUCTS_BY_PRICE,
+      payload: prodSortByPrice
+    }
   }
 }
