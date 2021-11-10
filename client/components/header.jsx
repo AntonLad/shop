@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { sortProductsByName, sortProductsByPrice } from '../redux/reducers/products'
 
+import Button from './button'
+
 
 // import DataOfProducts from './data-of-products'
 
@@ -34,9 +36,10 @@ const Header = () => {
           <Link to="/basket">Summury of products: {sumPrice} usd</Link>
         </div>
         <div id="order-count" className="order-count border rounded py-1 px-2">
-          <button type="button" className="bg-indigo-400 rounded-md mr-2 p-1">
+          <Button />
+          {/* <button type="button" className="bg-indigo-400 rounded-md mr-2 p-1">
             USD
-          </button>
+          </button> */}
           <button 
             type="button" 
             className="bg-indigo-400 rounded-md mr-2 p-1"
