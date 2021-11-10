@@ -4,6 +4,8 @@ import cors from 'cors'
 import sockjs from 'sockjs'
 import { renderToStaticNodeStream } from 'react-dom/server'
 import React from 'react'
+import axios from 'axios'
+
 
 import cookieParser from 'cookie-parser'
 import config from './config'
@@ -33,6 +35,14 @@ const middleware = [
 ]
 
 middleware.forEach((it) => server.use(it))
+
+server.get('/api/v1', async (req, res) => {
+  const currency = await axios(
+    'https://api.exchangerate.host/latest?base=USD&symbols=USD,EUR,CAD'
+  ).then((it) => it.data.rates)
+  // console.log('curency', currency)
+  res.json(currency)
+})
 
 server.use('/api/', (req, res) => {
   res.status(404)

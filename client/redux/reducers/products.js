@@ -1,12 +1,17 @@
+// import thunk from 'redux-thunk'
+import axios from 'axios'
 import DataOfProducts from '../../components/data-of-products'
 // import { useSelector } from 'react-redux'
 
 const PRODUCT_LIST = 'PRODUCT_LIST'
 const SORT_PRODUCTS = 'SORT_PRODUCTS'
 const SORT_PRODUCTS_BY_PRICE = 'SORT_PRODUCTS_BY_PRICE'
+const CURRENCY = 'CURRENCY'
 
 const initialState = {
-  productList: []
+  productList: [],
+  currency: 1,
+  currencyName: 'USD' 
 }
 
 export default (state = initialState, action) => {
@@ -19,12 +24,21 @@ export default (state = initialState, action) => {
     }
     case SORT_PRODUCTS: {
       return {
+        ...state,
         productList: [...action.payload]
       }
     }
     case SORT_PRODUCTS_BY_PRICE: {
       return {
+        ...state,
         productList: [...action.payload]
+      }
+    }
+    case CURRENCY: {
+      return {
+        ...state,
+        currency: [...action.payload],
+        currencyName: [...action.currencyName]
       }
     }
     default:
@@ -86,5 +100,17 @@ export function sortProductsByPrice(value) {
       type: SORT_PRODUCTS_BY_PRICE,
       payload: prodSortByPrice
     }
+  }
+}
+
+export function currency(value) {
+  return async (dispatch) => {
+    await axios('/api/v1').then(({ data }) => {
+      dispatch({
+        type: CURRENCY,
+        payload: data[value],
+        currencyName: value
+      })
+    })
   }
 }

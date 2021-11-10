@@ -2,18 +2,13 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { sortProductsByName, sortProductsByPrice } from '../redux/reducers/products'
+import { sortProductsByName, sortProductsByPrice, currency } from '../redux/reducers/products'
 
-import Button from './button'
-
-
-// import DataOfProducts from './data-of-products'
 
 const Header = () => {
   const dispatch = useDispatch()
   const productsBasket = useSelector((store) => store.basket.productInBasket)
   const [isRevers, setIsRevers] = useState(true)
-  const [isReversPrice, setIsReversPrise] = useState(true)
   const sumPrice = productsBasket.reduce((acc, rec) => {
     return acc + rec.price
   }, 0)
@@ -36,34 +31,45 @@ const Header = () => {
           <Link to="/basket">Summury of products: {sumPrice} usd</Link>
         </div>
         <div id="order-count" className="order-count border rounded py-1 px-2">
-          <Button />
-          {/* <button type="button" className="bg-indigo-400 rounded-md mr-2 p-1">
-            USD
-          </button> */}
-          <button 
-            type="button" 
+          <button
+            name="USD"
+            type="button"
             className="bg-indigo-400 rounded-md mr-2 p-1"
-            onClick={()=> {
-              productsBasket.map((it) => {
-                return it.price * 2
-              })
+            onClick={(e) => {
+              dispatch(currency(e.target.name))
+            }}
+          >
+            USD
+          </button>
+          <button 
+            name="EUR"
+            type="button"
+            className="bg-indigo-400 rounded-md mr-2 p-1"
+            onClick={(e) => {
+              dispatch(currency(e.target.name))
             }}
             >
-              EUR
+            EUR
           </button>
-          <button type="button" className="bg-indigo-400 rounded-md mr-2 p-1">
+          <button name="CAD"
+            type="button"
+            className="bg-indigo-400 rounded-md mr-2 p-1"
+            onClick={(e) => {
+              dispatch(currency(e.target.name))
+            }}
+            >
             CAD
           </button>
         </div>
         <div id="order-count" className="order-count border rounded py-1 px-2">
-          <button 
+          <button
             type="button"
             className="sort-price bg-yellow-300 rounded-md mr-2 p-1"
             onClick={() => {
-              setIsReversPrise(!isReversPrice)
-              dispatch(sortProductsByPrice(isReversPrice))
+              setIsRevers(!isRevers)
+              dispatch(sortProductsByPrice(isRevers))
             }}
-            >
+          >
             Sort by price
           </button>
           <button
