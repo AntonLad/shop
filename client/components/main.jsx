@@ -6,21 +6,19 @@ import DataOfProducts from './data-of-products'
 import Header from './header'
 import { allProducts } from '../redux/reducers/products'
 
-const Cards = (props) => {
-  console.log ('props', props)
+const Cards = () => {
   const dispatch = useDispatch()
   dispatch(allProducts(DataOfProducts))
   const listOfProducts = useSelector((store) => store.products.productList)
   const currantCurrency = useSelector((store) => store.products.currency)
   const currantCurrencyName = useSelector((store) => store.products.currencyName)
-  
+
   return (
     <div>
       <Header />
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap -mx-4 pt-40 pb-5">
           {listOfProducts.map((it) => {
-           
             return (
               <div key={it.id} className="card w-full sm:w-1/2 md:w-1/3 xl:w-1/4 p-4">
                 <div className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
@@ -35,9 +33,11 @@ const Cards = (props) => {
                     <h2 className="card__title mt-2 mb-2  font-bold">{it.title}</h2>
                     <div className="mt-3 flex items-center">
                       <span className="card__price font-bold text-xl">
-                        {(it.price * currantCurrency).toFixed(2)} 
+                        {(it.price * currantCurrency).toFixed(2)}
                       </span>
-                      <span className="currency text-sm font-semibold mr-2 p-1">{currantCurrencyName}</span>
+                      <span className="currency text-sm font-semibold mr-2 p-1">
+                        {currantCurrencyName}
+                      </span>
                       <span className="card__product-amount text-sm font-semibold flex ml-2">
                         how much in busket
                       </span>

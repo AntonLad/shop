@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { sortProductsByName, sortProductsByPrice, currency } from '../redux/reducers/products'
 
-
 const Header = () => {
   const dispatch = useDispatch()
   const productsBasket = useSelector((store) => store.basket.productInBasket)
@@ -41,23 +40,24 @@ const Header = () => {
           >
             USD
           </button>
-          <button 
+          <button
             name="EUR"
             type="button"
             className="bg-indigo-400 rounded-md mr-2 p-1"
             onClick={(e) => {
               dispatch(currency(e.target.name))
             }}
-            >
+          >
             EUR
           </button>
-          <button name="CAD"
+          <button
+            name="CAD"
             type="button"
             className="bg-indigo-400 rounded-md mr-2 p-1"
             onClick={(e) => {
               dispatch(currency(e.target.name))
             }}
-            >
+          >
             CAD
           </button>
         </div>

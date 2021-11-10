@@ -11,7 +11,7 @@ const CURRENCY = 'CURRENCY'
 const initialState = {
   productList: [],
   currency: 1,
-  currencyName: 'USD' 
+  currencyName: 'USD'
 }
 
 export default (state = initialState, action) => {
