@@ -5,6 +5,7 @@ import Header from './header'
 
 const Basket = () => {
   const products = useSelector((store) => store.basket.productInBasket)
+ 
   return (
     <div>
       <Header />
@@ -27,7 +28,7 @@ const Basket = () => {
                       <span className="card__price font-bold text-xl"> {it.price} </span>
                       <span className="currency text-sm font-semibold">currency</span>
                       <span className="card__product-amount text-sm font-semibold flex ml-2">
-                        how much in busket
+                        how much in busket {it.amount}
                       </span>
                       <span className="text-sm font-semibold">
                         <div className="flex ml-2">

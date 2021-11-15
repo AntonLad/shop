@@ -8,9 +8,12 @@ const Header = () => {
   const dispatch = useDispatch()
   const productsBasket = useSelector((store) => store.basket.productInBasket)
   const [isRevers, setIsRevers] = useState(true)
+  const currantCurrency = useSelector((store) => store.products.currency)
+  const currantCurrencyName = useSelector((store) => store.products.currencyName)
   const sumPrice = productsBasket.reduce((acc, rec) => {
     return acc + rec.price
   }, 0)
+
   return (
     <div className="flex flex-col items-center justify-center bg-indigo-100 text-black font-bold border shadow-lg p-2 w-screen">
       <div className="flex justify-between w-full items-center z-50 justify-items-stretch">
@@ -24,10 +27,12 @@ const Header = () => {
           </Link>
         </div>
         <div id="order-count" className="order-count border rounded py-1 px-2">
-          <Link to="/basket">Basket, {productsBasket.length}</Link>
+          <Link to="/basket">In basket: {productsBasket.length}</Link>
         </div>
         <div id="order-count" className="order-count border rounded py-1 px-2">
-          <Link to="/basket">Summury of products: {sumPrice} usd</Link>
+          <Link to="/basket">
+            Amount of purchases: {(sumPrice * currantCurrency).toFixed(2)} {currantCurrencyName}
+          </Link>
         </div>
         <div id="order-count" className="order-count border rounded py-1 px-2">
           <button

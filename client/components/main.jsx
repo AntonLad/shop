@@ -1,10 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import { useState } from 'react'
 
 import DataOfProducts from './data-of-products'
 import Header from './header'
 import { allProducts } from '../redux/reducers/products'
+import { addToBasket } from '../redux/reducers/basket'
 
 const Cards = () => {
   const dispatch = useDispatch()
@@ -12,6 +12,9 @@ const Cards = () => {
   const listOfProducts = useSelector((store) => store.products.productList)
   const currantCurrency = useSelector((store) => store.products.currency)
   const currantCurrencyName = useSelector((store) => store.products.currencyName)
+  const listInBasket = useSelector((store) => store.basket.productInBasket)
+  const countInBasket = useSelector((store) => store.basket.productInBasket)
+  // const countin = countInBasket.map((it) => it)
 
   return (
     <div>
@@ -39,7 +42,7 @@ const Cards = () => {
                         {currantCurrencyName}
                       </span>
                       <span className="card__product-amount text-sm font-semibold flex ml-2">
-                        how much in busket
+                        In busket: {countInBasket.map((item) => item.amount)}
                       </span>
                       <span className="text-sm font-semibold">
                         <div className="flex ml-2">
@@ -48,10 +51,7 @@ const Cards = () => {
                               type="button"
                               className="min-w-full px-2"
                               onClick={() => {
-                                dispatch({
-                                  type: 'ADD_BASKET',
-                                  payload: it
-                                })
+                                dispatch(addToBasket(it, listInBasket))
                               }}
                             >
                               Add to basket

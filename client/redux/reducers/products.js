@@ -3,6 +3,7 @@ import axios from 'axios'
 import DataOfProducts from '../../components/data-of-products'
 // import { useSelector } from 'react-redux'
 
+
 const PRODUCT_LIST = 'PRODUCT_LIST'
 const SORT_PRODUCTS = 'SORT_PRODUCTS'
 const SORT_PRODUCTS_BY_PRICE = 'SORT_PRODUCTS_BY_PRICE'
@@ -20,6 +21,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         productList: action.payload
+        
       }
     }
     case SORT_PRODUCTS: {
@@ -47,6 +49,9 @@ export default (state = initialState, action) => {
 }
 
 export function allProducts(value) {
+  // const valuePlus = value.map((it) => {
+  //   return {...it, key: countInBasket}
+  // })
   return {
     type: PRODUCT_LIST,
     payload: value
