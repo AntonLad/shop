@@ -3,7 +3,8 @@
 
 const ADD_BASKET = 'ADD_BASKET'
 const initialState = {
-  productInBasket: []
+  productInBasket: [],
+  
 }
 
 export default (state = initialState, action) => {
@@ -11,7 +12,8 @@ export default (state = initialState, action) => {
     case ADD_BASKET: {
       return {
         ...state,
-        productInBasket: action.payload
+        productInBasket: action.payload,
+       
       }
     }
     default:
@@ -36,7 +38,8 @@ export const addToBasket = (value, listInBasket) => {
   }
   return {
     type: 'ADD_BASKET',
-    payload: getNewList(idProd)
+    payload: getNewList(idProd),
+    
   }
 
 
@@ -72,3 +75,5 @@ export const addToBasket = (value, listInBasket) => {
 
 
 }
+
+

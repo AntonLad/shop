@@ -28,7 +28,7 @@ const Basket = () => {
                       <span className="card__price font-bold text-xl"> {it.price} </span>
                       <span className="currency text-sm font-semibold">currency</span>
                       <span className="card__product-amount text-sm font-semibold flex ml-2">
-                        how much in busket {it.amount}
+                        In busket: {it.amount}
                       </span>
                       <span className="text-sm font-semibold">
                         <div className="flex ml-2">
@@ -52,3 +52,10 @@ const Basket = () => {
 }
 
 export default Basket
+
+export const AmountInBasket = () => {
+  const products = useSelector((store) => store.basket.productInBasket)
+    return (
+      products.map((it) => it.amount)
+    )
+}
