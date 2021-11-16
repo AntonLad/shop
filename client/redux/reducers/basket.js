@@ -13,7 +13,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         productInBasket: action.payload,
-       
+      }
+    }
+    case 'SORT_PRODUCTS_BY_PRICE_B': {
+      return {
+        ...state,
+        productInBasket: [...action.payload]
       }
     }
     default:
@@ -39,9 +44,31 @@ export const addToBasket = (value, listInBasket) => {
   return {
     type: 'ADD_BASKET',
     payload: getNewList(idProd),
-    
   }
+}
 
+export const removeFromBasket = (value, listInBasket) => {
+  const idProd = value.id
+  const getNewList = (idProduct) => {
+    if (listInBasket.length === 0) {
+      return [{ ...value, amount: 1 }]
+    }
+    const idList = listInBasket.map((obj) => obj.id)
+    const foundIdIndex = idList.indexOf(idProduct)
+    if (foundIdIndex === -1) {
+      return [...listInBasket, { ...value, amount: 1 }]
+    }
+    return listInBasket.map((obj, index) =>
+      index === foundIdIndex ? { ...obj, amount: obj.amount - 1 } : obj
+    )
+  }
+  return {
+    type: 'ADD_BASKET',
+    payload: getNewList(idProd),
+  }
+}
+
+  
 
   // const prodInBask = listInBasket.reduce((acc, rec) => {
   //     if (rec.id !== value.id) {
@@ -73,7 +100,24 @@ export const addToBasket = (value, listInBasket) => {
   // }
 
 
-
+export function sortProductsByPriceB(value, listInBasket) {
+  if (value) {
+    const prodSortByPrice = listInBasket.sort((a, b) => {
+      return a.price - b.price
+    })
+    return {
+      type: 'SORT_PRODUCTS_BY_PRICE_B',
+      payload: prodSortByPrice
+    }
+  }
+  {
+    const prodSortByPrice = listInBasket.sort((a, b) => {
+      return b.price - a.price
+    })
+    return {
+      type: 'SORT_PRODUCTS_BY_PRICE_B',
+      payload: prodSortByPrice
+    }
+  }
 }
-
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { sortProductsByName, sortProductsByPrice, currency } from '../redux/reducers/products'
+import { sortProductsByPriceB } from '../redux/reducers/basket'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -11,7 +12,10 @@ const Header = () => {
   const currantCurrency = useSelector((store) => store.products.currency)
   const currantCurrencyName = useSelector((store) => store.products.currencyName)
   const sumPrice = productsBasket.reduce((acc, rec) => {
-    return acc + rec.price
+    return acc + rec.price * rec.amount
+  }, 0)
+  const sumOfProducts = productsBasket.reduce((acc, rec) => {
+    return acc + rec.amount
   }, 0)
 
   return (
@@ -27,7 +31,7 @@ const Header = () => {
           </Link>
         </div>
         <div id="order-count" className="order-count border rounded py-1 px-2">
-          <Link to="/basket">In basket: {productsBasket.length}</Link>
+          <Link to="/basket">In basket: {sumOfProducts}</Link>
         </div>
         <div id="order-count" className="order-count border rounded py-1 px-2">
           <Link to="/basket">
@@ -72,7 +76,7 @@ const Header = () => {
             className="sort-price bg-yellow-300 rounded-md mr-2 p-1"
             onClick={() => {
               setIsRevers(!isRevers)
-              dispatch(sortProductsByPrice(isRevers))
+              dispatch(sortProductsByPrice(isRevers), sortProductsByPriceB(isRevers, productsBasket) )
             }}
           >
             Sort by price

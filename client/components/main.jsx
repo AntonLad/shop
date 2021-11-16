@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React /* , { useState } */ from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 
@@ -13,14 +13,11 @@ import { addToBasket } from '../redux/reducers/basket'
 const Cards = () => {
   const dispatch = useDispatch()
   dispatch(allProducts(DataOfProducts))
-  const [amount, setAmount] = useState(0)
+  
   const listOfProducts = useSelector((store) => store.products.productList)
   const currantCurrency = useSelector((store) => store.products.currency)
   const currantCurrencyName = useSelector((store) => store.products.currencyName)
   const listInBasket = useSelector((store) => store.basket.productInBasket)
-
-  // const countInBasket = useSelector((store) => store.basket.productInBasket)
-  // const countin = countInBasket.map((it) => it)
 
   return (
     <div>
@@ -28,8 +25,6 @@ const Cards = () => {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap -mx-4 pt-40 pb-5">
           {listOfProducts.map((it) => {
-            const x = listInBasket.map((obj) => obj.amount)
-            setAmount(x)
             return (
               <div key={it.id} className="card w-full sm:w-1/2 md:w-1/3 xl:w-1/4 p-4">
                 <div className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
@@ -50,7 +45,12 @@ const Cards = () => {
                         {currantCurrencyName}
                       </span>
                       <span className="card__product-amount text-sm font-semibold flex ml-2">
-                        In busket: {amount}
+                         {listInBasket.map((obj) => {
+                          if (it.id === obj.id) {
+                            return <div>{`In busket: ${obj.amount}`}</div>
+                          }
+                          return ''
+                        })}
                       </span>
                       <span className="text-sm font-semibold">
                         <div className="flex ml-2">
