@@ -46,7 +46,7 @@ const Cards = () => {
                       </span>
                       <span className="card__product-amount text-sm font-semibold flex ml-2">
                          {listInBasket.map((obj) => {
-                          if (it.id === obj.id) {
+                          if (it.id === obj.id && obj.amount !== 0) {
                             return <div>{`In busket: ${obj.amount}`}</div>
                           }
                           return ''

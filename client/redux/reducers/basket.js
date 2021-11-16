@@ -64,7 +64,7 @@ export const removeFromBasket = (value, listInBasket) => {
   }
   return {
     type: 'ADD_BASKET',
-    payload: getNewList(idProd),
+    payload: getNewList(idProd)
   }
 }
 
