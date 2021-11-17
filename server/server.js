@@ -12,6 +12,8 @@ import config from './config'
 import Html from '../client/html'
 
 require('colors')
+const { readFile, writeFile, /* stat, unlink  */  } = require('fs').promises
+
 
 let Root
 try {
@@ -40,9 +42,31 @@ server.get('/api/v1', async (req, res) => {
   const currency = await axios(
     'https://api.exchangerate.host/latest?base=USD&symbols=USD,EUR,CAD'
   ).then((it) => it.data.rates)
-  // console.log('curency', currency)
   res.json(currency)
 })
+
+const filePath = `${__dirname}/log.json`
+const writeNewFile = (logArray) => {
+  return writeFile(filePath, JSON.stringify(logArray), 'utf-8')
+}
+const getLogs = () => {
+
+}
+
+server.get('/api/v1/log', async (req, res) => {
+  const logList = await readFile(filePath, 'utf-8')
+    .then((logdata) => {
+      return JSON.parse(logdata)
+    })
+    .catch(async () => {
+      const resivedLogs = await getLogs()
+      await writeNewFile(resivedLogs)
+      return resivedLogs
+    })
+  res.json(logList)
+})
+
+
 
 server.use('/api/', (req, res) => {
   res.status(404)

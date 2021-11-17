@@ -12,7 +12,6 @@ const Basket = () => {
   const sumPrice = products.reduce((acc, rec) => {
     return acc + rec.price * rec.amount
   }, 0)
-  
 
   return (
     <div>
@@ -47,12 +46,10 @@ const Basket = () => {
                         <div className="flex ml-2">
                           <span className="box m-1 ml-auto bg-green-600 text-white hover:bg-green-800 rounded-md">
                             <button
-                              type="button" 
+                              type="button"
                               className="min-w-full px-2 mt-2 mb-2  font-bold"
-                              onClick={() =>
-                                dispatch(removeFromBasket(it, products))  
-                              }
-                              >
+                              onClick={() => dispatch(removeFromBasket(it, products))}
+                            >
                               remove from basket
                             </button>
                           </span>
@@ -60,7 +57,7 @@ const Basket = () => {
                       </span>
                     </div>
                     <div className="product__total_price mt-2 mb-2  font-bold">
-                      Total price: {(it.price * currantCurrency* it.amount).toFixed(2)}
+                      Total price: {(it.price * currantCurrency * it.amount).toFixed(2)}
                     </div>
                   </div>
                 </div>

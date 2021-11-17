@@ -2,9 +2,9 @@
 // import { useSelector } from 'react-redux'
 
 const ADD_BASKET = 'ADD_BASKET'
+const REMOVE_FROM_BASKET = 'REMOVE_FROM_BASKET'
 const initialState = {
-  productInBasket: [],
-  
+  productInBasket: []
 }
 
 export default (state = initialState, action) => {
@@ -12,7 +12,13 @@ export default (state = initialState, action) => {
     case ADD_BASKET: {
       return {
         ...state,
-        productInBasket: action.payload,
+        productInBasket: action.payload
+      }
+    }
+    case REMOVE_FROM_BASKET: {
+      return {
+        ...state,
+        productInBasket: action.payload
       }
     }
     case 'SORT_PRODUCTS_BY_PRICE_B': {
@@ -43,7 +49,7 @@ export const addToBasket = (value, listInBasket) => {
   }
   return {
     type: 'ADD_BASKET',
-    payload: getNewList(idProd),
+    payload: getNewList(idProd)
   }
 }
 
@@ -63,42 +69,10 @@ export const removeFromBasket = (value, listInBasket) => {
     )
   }
   return {
-    type: 'ADD_BASKET',
+    type: REMOVE_FROM_BASKET,
     payload: getNewList(idProd)
   }
 }
-
-  
-
-  // const prodInBask = listInBasket.reduce((acc, rec) => {
-  //     if (rec.id !== value.id) {
-  //       return [...listInBasket, { ...value, count: 1 }]
-  //     }
-  //     return [{ ...rec, count: rec.count + 1 }]
-  //   },
-  //   [{ ...value, count: 1 }]
-  //   // []
-  // )
-  // return {
-  //   type: 'ADD_BASKET',
-  //   payload: prodInBask
-  // }
-
-  // const isExist = listInBasket.find((item) => item.id === value.id)
-  // let updatedList = []
-  // if (isExist) {
-  //   updatedList = listInBasket.map((obj) =>
-  //     obj.id === value.id ? { ...obj, count: obj.count + 1 } : obj
-  //   )
-  // } else {
-  //   updatedList = [...listInBasket, { ...value, count: 1 }]
-  // }
-
-  // return {
-  //   type: 'ADD_BASKET',
-  //   payload: updatedList
-  // }
-
 
 export function sortProductsByPriceB(value, listInBasket) {
   if (value) {
@@ -121,3 +95,31 @@ export function sortProductsByPriceB(value, listInBasket) {
   }
 }
 
+// const prodInBask = listInBasket.reduce((acc, rec) => {
+//     if (rec.id !== value.id) {
+//       return [...listInBasket, { ...value, count: 1 }]
+//     }
+//     return [{ ...rec, count: rec.count + 1 }]
+//   },
+//   [{ ...value, count: 1 }]
+//   // []
+// )
+// return {
+//   type: 'ADD_BASKET',
+//   payload: prodInBask
+// }
+
+// const isExist = listInBasket.find((item) => item.id === value.id)
+// let updatedList = []
+// if (isExist) {
+//   updatedList = listInBasket.map((obj) =>
+//     obj.id === value.id ? { ...obj, count: obj.count + 1 } : obj
+//   )
+// } else {
+//   updatedList = [...listInBasket, { ...value, count: 1 }]
+// }
+
+// return {
+//   type: 'ADD_BASKET',
+//   payload: updatedList
+// }

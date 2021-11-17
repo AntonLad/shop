@@ -76,7 +76,13 @@ const Header = () => {
             className="sort-price bg-yellow-300 rounded-md mr-2 p-1"
             onClick={() => {
               setIsRevers(!isRevers)
-              dispatch(sortProductsByPrice(isRevers), sortProductsByPriceB(isRevers, productsBasket) )
+              dispatch(
+                sortProductsByPriceB(isRevers, productsBasket)                
+              )
+              dispatch(
+                
+                sortProductsByPrice(isRevers)
+              )
             }}
           >
             Sort by price
