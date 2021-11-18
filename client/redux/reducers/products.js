@@ -3,7 +3,6 @@ import axios from 'axios'
 import DataOfProducts from '../../components/data-of-products'
 // import { useSelector } from 'react-redux'
 
-
 const PRODUCT_LIST = 'PRODUCT_LIST'
 const SORT_PRODUCTS = 'SORT_PRODUCTS'
 const SORT_PRODUCTS_BY_PRICE = 'SORT_PRODUCTS_BY_PRICE'
@@ -12,7 +11,8 @@ const CURRENCY = 'CURRENCY'
 const initialState = {
   productList: [],
   currency: 1,
-  currencyName: 'USD'
+  currencyName: 'USD',
+  name: ''
 }
 
 export default (state = initialState, action) => {
@@ -21,19 +21,20 @@ export default (state = initialState, action) => {
       return {
         ...state,
         productList: action.payload
-        
       }
     }
     case SORT_PRODUCTS: {
       return {
         ...state,
-        productList: [...action.payload]
+        productList: [...action.payload],
+        name: action.name
       }
     }
     case SORT_PRODUCTS_BY_PRICE: {
       return {
         ...state,
-        productList: [...action.payload]
+        productList: [...action.payload],
+        name: action.name
       }
     }
     case CURRENCY: {
@@ -69,7 +70,8 @@ export function sortProductsByName(value) {
     })
     return {
       type: SORT_PRODUCTS,
-      payload: prodSort
+      payload: prodSort,
+      name: 'name'
     }
   }
   {
@@ -82,7 +84,8 @@ export function sortProductsByName(value) {
     })
     return {
       type: SORT_PRODUCTS,
-      payload: prodSort
+      payload: prodSort,
+      name: 'name'
     }
   }
 }
@@ -94,7 +97,8 @@ export function sortProductsByPrice(value) {
     })
     return {
       type: SORT_PRODUCTS_BY_PRICE,
-      payload: prodSortByPrice
+      payload: prodSortByPrice,
+      name: 'price'
     }
   }
   {
@@ -103,19 +107,22 @@ export function sortProductsByPrice(value) {
     })
     return {
       type: SORT_PRODUCTS_BY_PRICE,
-      payload: prodSortByPrice
+      payload: prodSortByPrice,
+      name: 'price'
     }
   }
 }
 
 export function currency(value) {
   return async (dispatch) => {
-    await axios('/api/v1').then(({ data }) => {
-      dispatch({
-        type: CURRENCY,
-        payload: data[value],
-        currencyName: value
+    await axios('/api/v1')
+      .then(({ data }) => {
+        dispatch({
+          type: CURRENCY,
+          payload: data[value],
+          currencyName: value
+        })
       })
-    })
+      .catch((e) => console.log('error', e))
   }
 }

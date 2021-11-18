@@ -6,14 +6,12 @@ import { renderToStaticNodeStream } from 'react-dom/server'
 import React from 'react'
 import axios from 'axios'
 
-
 import cookieParser from 'cookie-parser'
 import config from './config'
 import Html from '../client/html'
 
 require('colors')
-const { readFile, writeFile, /* stat, unlink  */  } = require('fs').promises
-
+const { readFile, writeFile /*  ,  stat, unlink  */ } = require('fs').promises
 
 let Root
 try {
@@ -49,21 +47,21 @@ const filePath = `${__dirname}/log.json`
 const writeNewFile = (logArray) => {
   return writeFile(filePath, JSON.stringify(logArray), 'utf-8')
 }
-const getLogs = () => {
 
-}
 
-server.get('/api/v1/log', async (req, res) => {
+server.post('/api/v1/logs', async (req, res) => {
   const logList = await readFile(filePath, 'utf-8')
     .then((logdata) => {
       return JSON.parse(logdata)
     })
     .catch(async () => {
-      const resivedLogs = await getLogs()
-      await writeNewFile(resivedLogs)
-      return resivedLogs
+      const result = req.body
+      await writeNewFile([result])
+      res.json(logList)
     })
-  res.json(logList)
+     const newLog = req.body 
+    await writeNewFile([...logList, newLog])
+    res.json(logList)
 })
 
 

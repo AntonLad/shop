@@ -4,7 +4,8 @@
 const ADD_BASKET = 'ADD_BASKET'
 const REMOVE_FROM_BASKET = 'REMOVE_FROM_BASKET'
 const initialState = {
-  productInBasket: []
+  productInBasket: [],
+  name: ''
 }
 
 export default (state = initialState, action) => {
@@ -12,13 +13,15 @@ export default (state = initialState, action) => {
     case ADD_BASKET: {
       return {
         ...state,
-        productInBasket: action.payload
+        productInBasket: action.payload,
+        name: action.name
       }
     }
     case REMOVE_FROM_BASKET: {
       return {
         ...state,
-        productInBasket: action.payload
+        productInBasket: action.payload,
+        name: action.name
       }
     }
     case 'SORT_PRODUCTS_BY_PRICE_B': {
@@ -49,7 +52,8 @@ export const addToBasket = (value, listInBasket) => {
   }
   return {
     type: 'ADD_BASKET',
-    payload: getNewList(idProd)
+    payload: getNewList(idProd),
+    name: value.title
   }
 }
 
@@ -70,7 +74,8 @@ export const removeFromBasket = (value, listInBasket) => {
   }
   return {
     type: REMOVE_FROM_BASKET,
-    payload: getNewList(idProd)
+    payload: getNewList(idProd),
+    name: value.title
   }
 }
 
