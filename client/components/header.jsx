@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { sortProductsByName, sortProductsByPrice, currency } from '../redux/reducers/products'
 import { sortProductsByPriceB } from '../redux/reducers/basket'
+import { logList } from '../redux/reducers/log'
 
-const Header = () => {
+const Header = ({ history }) => {
   const dispatch = useDispatch()
   const productsBasket = useSelector((store) => store.basket.productInBasket)
   const [isRevers, setIsRevers] = useState(true)
@@ -76,13 +77,12 @@ const Header = () => {
             className="sort-price bg-yellow-300 rounded-md mr-2 p-1"
             onClick={() => {
               setIsRevers(!isRevers)
-              dispatch(
-                sortProductsByPriceB(isRevers, productsBasket)                
-              )
-              dispatch(
-                
-                sortProductsByPrice(isRevers)
-              )
+              if (history.location.pathname === '/basket') {
+                dispatch(sortProductsByPriceB(isRevers, productsBasket))
+              }
+              if (history.location.pathname === '/' || history.location.pathname === '/logs') {
+                dispatch(sortProductsByPrice(isRevers))
+              }
             }}
           >
             Sort by price
@@ -96,6 +96,15 @@ const Header = () => {
             }}
           >
             Sort by name
+          </button>
+          <button
+            type="button"
+            className="sort-name bg-yellow-300 rounded-md mr-2 p-1 py-1 "
+            onClick={() => {
+              dispatch(logList())
+            }}
+          >
+            <Link to="/logs"> Logs </Link>
           </button>
         </div>
       </div>

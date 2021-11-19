@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Header from './header'
 import { removeFromBasket } from '../redux/reducers/basket'
 
-const Basket = () => {
+const Basket = ({ history }) => {
   const dispatch = useDispatch()
   const products = useSelector((store) => store.basket.productInBasket)
   const currantCurrencyName = useSelector((store) => store.products.currencyName)
@@ -15,7 +15,7 @@ const Basket = () => {
 
   return (
     <div>
-      <Header />
+      <Header history={history} />
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap -mx-4 pt-40 pb-5">
           {products.map((it) => {

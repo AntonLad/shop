@@ -48,7 +48,6 @@ const writeNewFile = (logArray) => {
   return writeFile(filePath, JSON.stringify(logArray), 'utf-8')
 }
 
-
 server.post('/api/v1/logs', async (req, res) => {
   const logList = await readFile(filePath, 'utf-8')
     .then((logdata) => {
@@ -59,12 +58,18 @@ server.post('/api/v1/logs', async (req, res) => {
       await writeNewFile([result])
       res.json(logList)
     })
-     const newLog = req.body 
-    await writeNewFile([...logList, newLog])
-    res.json(logList)
+  const newLog = req.body
+  await writeNewFile([...logList, newLog])
+  res.json(logList)
 })
 
-
+server.get('/api/v1/logs', async (req, res) => {
+  const logList = await readFile(filePath, 'utf-8').then((logdata) => {
+    return JSON.parse(logdata)
+  })
+  console.log (logList)
+  res.json(logList)
+})
 
 server.use('/api/', (req, res) => {
   res.status(404)

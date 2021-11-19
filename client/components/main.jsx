@@ -10,7 +10,7 @@ import { addToBasket } from '../redux/reducers/basket'
 
 
 
-const Cards = () => {
+const Cards = ({ history }) => {
   const dispatch = useDispatch()
   dispatch(allProducts(DataOfProducts))
   
@@ -21,7 +21,7 @@ const Cards = () => {
 
   return (
     <div>
-      <Header />
+      <Header history={history} />
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap -mx-4 pt-40 pb-5">
           {listOfProducts.map((it) => {

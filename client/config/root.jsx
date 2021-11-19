@@ -10,6 +10,7 @@ import DummyView from '../components/dummy-view'
 import NotFound from '../components/404'
 import Cards from '../components/main'
 import Basket from '../components/basket'
+import Log from '../components/logs-list'
 
 import Startup from './startup'
 
@@ -50,8 +51,9 @@ const RootComponent = (props) => {
       <RouterSelector history={history} location={props.location} context={props.context}>
         <Startup>
           <Switch>
-            <Route exact path="/" component={() => <Cards />} />
-            <Route exact path="/basket" component={() => <Basket />} />
+            <Route exact path="/" component={() => <Cards history={history} />} />
+            <Route exact path="/basket" component={() => <Basket history={history} />} />
+            <Route exact path="/logs" component={() => <Log history={history}/>} />
             <Route exact path="/" component={DummyView} />
             <Route exact path="/dashboard" component={Home} />
             <PrivateRoute exact path="/hidden-route" component={DummyView} />
