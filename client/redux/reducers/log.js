@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const CREATE_LOG_LIST = 'CREATE_LOG_LIST'
-const REMOVE_LOG = 'REMOVE_LOG'
+const DELETE_LOG_FILE = 'DELETE_LOG_FILE'
 
 const initialState = {
   logs: []
@@ -15,8 +15,11 @@ export default (state = initialState, action) => {
         logs: action.payload
       }
     }
-    case REMOVE_LOG: {
-      return []
+    case DELETE_LOG_FILE: {
+      return {
+        ...state,
+        logs: action.payload
+      }
     }
 
     default:
@@ -49,19 +52,16 @@ export const logList = () => {
   }
 }
 
-// if (action.type.indexOf('@@') !== 0) {
-//   const time = +new Date()
-//   return (dispatch) => {
-//     axios.post('/api/v1/logs', { action: action.type, time }).then(({ data }) => {
-//       dispatch({
-//         data
-//       })
-//     })
-//   }
-// const time = +new Date()
-// axios('/api/v1/logs/:id'
-// //  {
-// //   action: action.type,
-// //   time
-// // }
-// ).then(({ data }) => data )
+export const deleteFileOfLogs = () => {
+  return async (dispatch) => {
+    await axios
+      .delete('/api/v1/logs')
+      .then(() => {
+        dispatch({
+          type: DELETE_LOG_FILE,
+          payload: []
+        })
+      })
+      .catch((e) => console.log('error', e))
+  }
+}

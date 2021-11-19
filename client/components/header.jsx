@@ -53,7 +53,7 @@ const Header = ({ history }) => {
           <button
             name="EUR"
             type="button"
-            className="bg-indigo-400 rounded-md mr-2 p-1"
+            className="bg-indigo-400 rounded-md mr-2 p-1 my-2"
             onClick={(e) => {
               dispatch(currency(e.target.name))
             }}
@@ -63,7 +63,7 @@ const Header = ({ history }) => {
           <button
             name="CAD"
             type="button"
-            className="bg-indigo-400 rounded-md mr-2 p-1"
+            className="bg-indigo-400 rounded-md mr-2 p-1 "
             onClick={(e) => {
               dispatch(currency(e.target.name))
             }}
@@ -89,7 +89,7 @@ const Header = ({ history }) => {
           </button>
           <button
             type="button"
-            className="sort-name bg-yellow-300 rounded-md mr-2 p-1"
+            className="sort-name bg-yellow-300 rounded-md mr-2 p-1 my-2"
             onClick={() => {
               setIsRevers(!isRevers)
               dispatch(sortProductsByName(isRevers))
@@ -99,7 +99,7 @@ const Header = ({ history }) => {
           </button>
           <button
             type="button"
-            className="sort-name bg-yellow-300 rounded-md mr-2 p-1 py-1 "
+            className="sort-name bg-green-200 rounded-md mr-2 p-1 py-1"
             onClick={() => {
               dispatch(logList())
             }}

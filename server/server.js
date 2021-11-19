@@ -11,7 +11,7 @@ import config from './config'
 import Html from '../client/html'
 
 require('colors')
-const { readFile, writeFile /*  ,  stat, unlink  */ } = require('fs').promises
+const { readFile, writeFile, unlink /*  ,  stat,  */ } = require('fs').promises
 
 let Root
 try {
@@ -67,8 +67,18 @@ server.get('/api/v1/logs', async (req, res) => {
   const logList = await readFile(filePath, 'utf-8').then((logdata) => {
     return JSON.parse(logdata)
   })
-  console.log (logList)
-  res.json(logList)
+   res.json(logList)
+})
+
+server.delete('/api/v1/logs', (req, res) => {
+  unlink(filePath)
+    .then(() => {
+      res.json({ status: 'File deleted' })
+    })
+    .catch((err) => {
+      console.log('Error: ', err)
+      res.json({ status: 'No file' })
+    })
 })
 
 server.use('/api/', (req, res) => {
