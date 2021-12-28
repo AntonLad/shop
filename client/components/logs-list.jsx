@@ -18,33 +18,51 @@ const Log = ({ history }) => {
       <Header history={history} />
       <div>
         {listOfLogs.map((it) => {
-          if (it.action === 'CURRENCY') {
-            return (
-              <div
-                key={it.time}
-                className=""
-              >{`${it.action} -- change currency to ${it.curency} -- at time: ${it.time}`}</div>
-            )
-          }
-          if (it.action === 'SORT_PRODUCTS_BY_PRICE') {
-            return (
-              <div
-                key={it.time}
-              >{`${it.action} -- sort by price ${it.title} -- at time: ${it.time}`}</div>
-            )
-          }
-          if (it.action === 'REMOVE_FROM_BASKET') {
-            return (
-              <div
-                key={it.time}
-              >{`${it.action} -- remove "${it.title}" from basket -- at time: ${it.time}`}</div>
-            )
-          }
           return (
-            <div
-              key={it.time}
-            >{`${it.action} -- added product "${it.title}" to basket -- at time: ${it.time}`}</div>
+          <table key={it.time}>
+            <thead>
+              <tr>
+                <th>ActionName</th>
+                <th>Action</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tr>
+              <td>{it.action}</td>
+              <td>change currency to</td>
+              <td>{it.time}</td>
+            </tr>
+          </table>
           )
+          
+
+          // if (it.action === 'CURRENCY') {
+          //   return (
+          //     <div
+          //       key={it.time}
+          //       className=""
+          //     >{`${it.action} -- change currency to ${it.curency} -- at time: ${it.time}`}</div>
+          //   )
+          // }
+          // if (it.action === 'SORT_PRODUCTS_BY_PRICE') {
+          //   return (
+          //     <div
+          //       key={it.time}
+          //     >{`${it.action} -- sort by price ${it.title} -- at time: ${it.time}`}</div>
+          //   )
+          // }
+          // if (it.action === 'REMOVE_FROM_BASKET') {
+          //   return (
+          //     <div
+          //       key={it.time}
+          //     >{`${it.action} -- remove "${it.title}" from basket -- at time: ${it.time}`}</div>
+          //   )
+          // }
+          // return (
+          //   <div
+          //     key={it.time}
+          //   >{`${it.action} -- added product "${it.title}" to basket -- at time: ${it.time}`}</div>
+          // )
         })}
       </div>
       <button
