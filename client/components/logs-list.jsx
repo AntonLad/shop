@@ -17,53 +17,79 @@ const Log = ({ history }) => {
     <div>
       <Header history={history} />
       <div>
-        {listOfLogs.map((it) => {
-          return (
-          <table key={it.time}>
-            <thead>
-              <tr>
-                <th>ActionName</th>
-                <th>Action</th>
-                <th>Time</th>
-              </tr>
-            </thead>
+        <table className="table-auto border-collapse border border-gray-400">
+          <thead>
             <tr>
-              <td>{it.action}</td>
-              <td>change currency to</td>
-              <td>{it.time}</td>
+              <th>ActionName</th>
+              <th>Action</th>
+              <th>Time</th>
             </tr>
-          </table>
-          )
+          </thead>
+          {listOfLogs.map((it) => {
+            if (it.action === 'CURRENCY') {
+              const act = `change currency to ${it.curency}`
+              return (
+                <tr key={it.time} className="border border-gray-300">
+                  <td>{it.action}</td>
+                  <td>{act}</td>
+                  <td>{it.time}</td>
+                </tr>
+              )
+            }
+            if (it.action === 'SORT_PRODUCTS_BY_PRICE') {
+              const act = `sort by price ${it.title}`
+              return (
+                <tr key={it.time}>
+                  <td>{it.action}</td>
+                  <td>{act}</td>
+                  <td>{it.time}</td>
+                </tr>
+              )
+            }
+
+            return (
+              <tr key={it.time}>
+                <td>{it.action}</td>
+                <td>{`added product "${it.title}" to basket`}</td>
+                <td>{it.time}</td>
+              </tr>
+            )
+          })}
+        </table>
+        
+        {/* {listOfLogs.map((it) => {
+          return (
+          
           
 
-          // if (it.action === 'CURRENCY') {
-          //   return (
-          //     <div
-          //       key={it.time}
-          //       className=""
-          //     >{`${it.action} -- change currency to ${it.curency} -- at time: ${it.time}`}</div>
-          //   )
-          // }
-          // if (it.action === 'SORT_PRODUCTS_BY_PRICE') {
-          //   return (
-          //     <div
-          //       key={it.time}
-          //     >{`${it.action} -- sort by price ${it.title} -- at time: ${it.time}`}</div>
-          //   )
-          // }
-          // if (it.action === 'REMOVE_FROM_BASKET') {
-          //   return (
-          //     <div
-          //       key={it.time}
-          //     >{`${it.action} -- remove "${it.title}" from basket -- at time: ${it.time}`}</div>
-          //   )
-          // }
-          // return (
-          //   <div
-          //     key={it.time}
-          //   >{`${it.action} -- added product "${it.title}" to basket -- at time: ${it.time}`}</div>
-          // )
-        })}
+          if (it.action === 'CURRENCY') {
+            return (
+              <div
+                key={it.time}
+                className=""
+              >{`${it.action} -- change currency to ${it.curency} -- at time: ${it.time}`}</div>
+            )
+          }
+          if (it.action === 'SORT_PRODUCTS_BY_PRICE') {
+            return (
+              <div
+                key={it.time}
+              >{`${it.action} -- sort by price ${it.title} -- at time: ${it.time}`}</div>
+            )
+          }
+          if (it.action === 'REMOVE_FROM_BASKET') {
+            return (
+              <div
+                key={it.time}
+              >{`${it.action} -- remove "${it.title}" from basket -- at time: ${it.time}`}</div>
+            )
+          }
+          return (
+            <div
+              key={it.time}
+            >{`${it.action} -- added product "${it.title}" to basket -- at time: ${it.time}`}</div>
+          )
+        })} */}
       </div>
       <button
         type="button"
